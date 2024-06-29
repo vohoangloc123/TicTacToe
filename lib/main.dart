@@ -29,7 +29,7 @@ class _HomePageState extends State<HomePage> {
   var myTextStyle = TextStyle(color: Colors.white, fontSize: 30);
   int ohScore = 0;
   int exScore = 0;
-
+  int filledBoxes = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -102,8 +102,10 @@ class _HomePageState extends State<HomePage> {
     setState(() {
       if (ohTurn && displayExOh[index] == '') {
         displayExOh[index] = 'o';
+        filledBoxes += 1;
       } else if (!ohTurn && displayExOh[index] == '') {
         displayExOh[index] = 'x';
+        filledBoxes += 1;
       }
       ohTurn = !ohTurn;
       _checkWinner();
@@ -150,7 +152,31 @@ class _HomePageState extends State<HomePage> {
         displayExOh[2] == displayExOh[6] &&
         displayExOh[2] != '') {
       _showWinDialog(displayExOh[2]);
+    } else if (filledBoxes == 9) {
+      _showDrawDialog();
     }
+  }
+
+  void _showDrawDialog() {
+    showDialog(
+      barrierDismissible:
+          false, //Để đảm bảo hộp thoại không thể bị loại bỏ bằng cách chạm vào bên ngoài hộp thoại
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('DRAW'),
+          actions: <Widget>[
+            TextButton(
+              child: Text('Play Again!'),
+              onPressed: () {
+                _clearBoard();
+                Navigator.of(context).pop();
+              },
+            )
+          ],
+        );
+      },
+    );
   }
 
   void _showWinDialog(String winner) {
@@ -178,6 +204,7 @@ class _HomePageState extends State<HomePage> {
     } else if (winner == 'x') {
       exScore += 1;
     }
+    filledBoxes=0;
     _clearBoard();
   }
 
