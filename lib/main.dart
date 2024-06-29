@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 void main() {
   runApp(const MyApp());
@@ -30,6 +31,10 @@ class _HomePageState extends State<HomePage> {
   int ohScore = 0;
   int exScore = 0;
   int filledBoxes = 0;
+  static var myNewFont = GoogleFonts.pressStart2p(
+      textStyle: TextStyle(color: Colors.black, letterSpacing: 3));
+  static var MyNewFontWhite = GoogleFonts.pressStart2p(
+      textStyle: TextStyle(color: Colors.white, letterSpacing: 3, fontSize: 15));
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,8 +50,8 @@ class _HomePageState extends State<HomePage> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text('Player o', style: myTextStyle),
-                      Text(ohScore.toString(), style: myTextStyle),
+                      Text('Player o', style: MyNewFontWhite),
+                      Text(ohScore.toString(), style: MyNewFontWhite),
                     ],
                   ),
                 ),
@@ -55,8 +60,8 @@ class _HomePageState extends State<HomePage> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text('Player x', style: myTextStyle),
-                      Text(exScore.toString(), style: myTextStyle),
+                      Text('Player x', style: MyNewFontWhite),
+                      Text(exScore.toString(), style: MyNewFontWhite),
                     ],
                   ),
                 ),
@@ -90,7 +95,17 @@ class _HomePageState extends State<HomePage> {
           ),
           Expanded(
             child: Container(
-              color: Colors.grey[700],
+              color: Colors.grey[800]!,
+              child: Center(
+                child: Column(
+                  children: <Widget>[
+                    Text('TIC TOC TOE', style: MyNewFontWhite),
+                    SizedBox(height: 60,),
+                    Text('MADE BY: IRIS', style: MyNewFontWhite),
+                    SizedBox(height: 20,),
+                  ],
+                ),
+              ),
             ),
           ),
         ],
